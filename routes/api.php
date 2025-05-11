@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeatherController;
 // use App\Http\Middleware\Authenticate;
 // use App\Http\Middleware\ForceJsonResponse;
+use App\Http\Middleware\CorsMiddleware;
 
 // Definisikan rate limiter "api"
 RateLimiter::for('api', function ($request) {
@@ -36,3 +37,5 @@ Route::middleware('auth:sanctum')->group(function () {
     // Logout
     Route::post('/logout', [AuthController::class, 'logout']);
 });
+
+Route::middleware(CorsMiddleware::class)->get('/posts', [PostController::class, 'index']);
